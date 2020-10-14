@@ -1,15 +1,14 @@
-# find-squre
+# Find best square
 
+## Requirement
 
-## requirements
+This script have been tested under Python 3.8.5.
 
-this script have been tested under Python 3.8.5
+## How to
 
-## how to
+### Generate maps
 
-### generate maps
-
-With x: columns, y: rows, d: density beeing set
+With values for x: columns, y: rows and d: density:
 
 ```bash
 for i in {1..10}
@@ -18,8 +17,8 @@ do
 done
 ```
 
-### resolve maps
+### Resolve maps
 
 ```bash
-python3 find-square map1.txt map2.txt *.txt
+python3 find_square.py map1.txt map2.txt *.txt
 ```
