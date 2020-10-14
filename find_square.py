@@ -49,8 +49,8 @@ class Matrix:
 
         # Parse first line
         m = string[:-1].split("\n")
-        n, self._empty, self._obstacle, self._filling = m.pop(0)
-        self._rows = int(n)
+        *n, self._empty, self._obstacle, self._filling = m.pop(0)
+        self._rows = int("".join(n))
         self._cols = len(m[0])
         # or raise ValueError
 
@@ -65,8 +65,10 @@ class Matrix:
 
         self._matrix = m
 
-    def print(self) -> None:
+    def print(self, title="") -> None:
         """ Print self on tty """
+        if title:
+            print(title)
         print("".join([row + "\n" for row in self._matrix]))
 
     def solve(self):
@@ -78,10 +80,13 @@ class Matrix:
 
         best = (0, (0, 0))  # size and bottom/right corners
         last_col = [0] * self._cols
-        last_val = 0
 
         for i in range(self._rows):
+
+            last_val = 0  # left border
+
             for j in range(self._cols):
+
                 value = last_col[j]
 
                 if self._matrix[i][j] is self._obstacle:
@@ -115,6 +120,8 @@ class Matrix:
 
 if __name__ == "__main__":
 
+    print("\033c", end="")  # reset tty
+
     pname, *fnames = sys.argv
 
     if not fnames:
@@ -125,9 +132,11 @@ if __name__ == "__main__":
         with open(fname) as file:
             try:
                 m = Matrix(file.read())
-                m.print()
+                m.print(f"Content of '{fname}':")
                 m.solve()
-                m.print()
+                m.print("Best square:")
+                input("Press any key for next map ...")
+                print("\033c", end="")
             except (AssertionError, ValueError):
                 print("Map error.")
                 continue

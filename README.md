@@ -1,9 +1,13 @@
 # find-squre
 
 
+## requirements
+
+this script have been tested under Python 3.8.5
+
 ## how to
 
-### generate a set of maps
+### generate maps
 
 With x: columns, y: rows, d: density beeing set
 
